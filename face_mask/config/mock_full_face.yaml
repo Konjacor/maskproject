@@ -1,0 +1,43 @@
+{
+  "runtime": {
+    "tracking_mode": "full_face",
+    "render_mode": "procedural",
+    "fps_target": 10,
+    "max_frames": 24,
+    "logger_name": "face_mask"
+  },
+  "sensor": {
+    "type": "mock",
+    "profile": "wave_features",
+    "width": 640,
+    "height": 480,
+    "seed": 17,
+    "noise": 0.025,
+    "base_brightness": 52,
+    "eye_speed": 1.4,
+    "brow_speed": 0.7
+  },
+  "features": {
+    "eye_smoothing_alpha": 0.42,
+    "brow_smoothing_alpha": 0.22
+  },
+  "state_machine": {
+    "min_hold_ms": 190,
+    "sleepy_enter": 0.27,
+    "sleepy_exit": 0.39,
+    "surprised_brow_enter": 0.43,
+    "surprised_brow_exit": 0.27,
+    "cheerful_brow_enter": 0.14
+  },
+  "renderer": {
+    "resolution": 16
+  },
+  "output": {
+    "always_print_ascii": false
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "logs/mock_full_face.log",
+    "json": true
+  }
+}

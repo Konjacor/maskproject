@@ -1,0 +1,43 @@
+{
+  "runtime": {
+    "tracking_mode": "adaptive_visible_region",
+    "render_mode": "procedural",
+    "fps_target": 15,
+    "max_frames": 120,
+    "logger_name": "face_mask"
+  },
+  "sensor": {
+    "type": "camera",
+    "camera_index": 0,
+    "width": 640,
+    "height": 480,
+    "fps": 20,
+    "flip_horizontal": false,
+    "flip_vertical": false,
+    "normalize_contrast": true,
+    "infrared_mode": true
+  },
+  "features": {
+    "eye_smoothing_alpha": 0.52,
+    "brow_smoothing_alpha": 0.30
+  },
+  "state_machine": {
+    "min_hold_ms": 220,
+    "sleepy_enter": 0.25,
+    "sleepy_exit": 0.37,
+    "surprised_brow_enter": 0.48,
+    "surprised_brow_exit": 0.30,
+    "cheerful_brow_enter": 0.18
+  },
+  "renderer": {
+    "resolution": 16
+  },
+  "output": {
+    "always_print_ascii": false
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "logs/pi_nightvision.log",
+    "json": true
+  }
+}
