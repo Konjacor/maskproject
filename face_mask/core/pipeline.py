@@ -13,6 +13,7 @@ from face_mask.renderers.procedural_renderer import ProceduralRenderer
 from face_mask.sensors.camera_sensor import CameraSensor
 from face_mask.sensors.mock_sensor import MockSensor
 from face_mask.sensors.replay_sensor import ReplaySensor
+from face_mask.tracking.adaptive_tracker import AdaptiveVisibleRegionTracker
 from face_mask.tracking.full_face_tracker import FullFaceTracker
 from face_mask.tracking.upper_face_tracker import UpperFaceTracker
 from face_mask.utils.timing import timed
@@ -83,7 +84,11 @@ class RuntimePipeline:
         return MockSensor(sensor_config)
 
     def _build_tracker(self, config: dict[str, Any]):
-        tracking_mode = config.get("runtime", {}).get("tracking_mode", "upper_face")
+        runtime_config = config.get("runtime", {})
+        tracking_mode = runtime_config.get("tracking_mode", "upper_face")
+        tracking_backend = runtime_config.get("tracking_backend", "legacy")
+        if tracking_backend == "adaptive":
+            return AdaptiveVisibleRegionTracker(tracking_mode=tracking_mode, config=config)
         if tracking_mode == "full_face":
             return FullFaceTracker(tracking_mode=tracking_mode)
         return UpperFaceTracker(tracking_mode=tracking_mode)

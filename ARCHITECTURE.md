@@ -748,7 +748,7 @@ Run:
 What to verify first:
 
 - camera stream opens reliably
-- both eyes and brow area are centered enough for the static ROI layout
+- both eyes and brow area are centered enough for the active ROI layout
 - `eye_open`, `brow_raise`, `visibility_score`, and `lighting_score` move in plausible directions
 - state changes are stable and do not flicker excessively
 
@@ -757,3 +757,20 @@ Important interpretation note:
 - current tracking is heuristic and calibration-driven, not identity-aware face recognition
 - it does not require enrolling a user face or defining a personal template in advance
 - it still depends on runtime calibration of ROI placement, lighting, and thresholds for the physical camera setup
+
+## 24. Tracking backends
+
+The runtime now supports two tracking backends:
+
+- `tracking_backend = adaptive`
+  - does coarse upper-face search, local follow-up, and relock when confidence drops
+  - use this for real camera work and broad device compatibility
+- `tracking_backend = legacy`
+  - uses the original fixed ROI layout as a fallback baseline
+  - use this for comparison and for very controlled camera positioning
+
+Suggested configs:
+
+- adaptive visible-light camera: `face_mask/config/pi_visible_camera.yaml`
+- adaptive night-vision camera: `face_mask/config/pi_nightvision.yaml`
+- legacy visible-light fallback: `face_mask/config/pi_visible_camera_legacy.yaml`

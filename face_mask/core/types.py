@@ -20,6 +20,23 @@ class ROI:
         height = max(1, min(self.height, image_height - y))
         return ROI(x=x, y=y, width=width, height=height)
 
+    def center(self) -> tuple[int, int]:
+        return self.x + self.width // 2, self.y + self.height // 2
+
+    def translate(self, dx: int, dy: int) -> "ROI":
+        return ROI(x=self.x + dx, y=self.y + dy, width=self.width, height=self.height)
+
+    def scale_from_center(self, scale_x: float, scale_y: float) -> "ROI":
+        center_x, center_y = self.center()
+        width = max(1, int(self.width * scale_x))
+        height = max(1, int(self.height * scale_y))
+        return ROI(
+            x=center_x - width // 2,
+            y=center_y - height // 2,
+            width=width,
+            height=height,
+        )
+
 
 @dataclass(slots=True)
 class FramePacket:

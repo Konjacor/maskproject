@@ -1,5 +1,6 @@
 {
   "runtime": {
+    "tracking_backend": "legacy",
     "tracking_mode": "upper_face",
     "render_mode": "procedural",
     "fps_target": 12,

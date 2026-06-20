@@ -1,7 +1,7 @@
 {
   "runtime": {
-    "tracking_backend": "adaptive",
-    "tracking_mode": "adaptive_visible_region",
+    "tracking_backend": "legacy",
+    "tracking_mode": "upper_face",
     "render_mode": "procedural",
     "fps_target": 12,
     "max_frames": 180,
@@ -30,11 +30,6 @@
     "surprised_brow_exit": 0.26,
     "cheerful_brow_enter": 0.15
   },
-  "tracking": {
-    "search_margin": 0.22,
-    "relock_frames": 5,
-    "min_tracking_confidence": 0.28
-  },
   "renderer": {
     "resolution": 16
   },
@@ -42,11 +37,11 @@
     "always_print_ascii": false,
     "print_features_every": 6,
     "snapshot_every": 12,
-    "snapshot_dir": "debug_frames"
+    "snapshot_dir": "debug_frames_legacy"
   },
   "logging": {
     "level": "DEBUG",
-    "file": "logs/pi_visible_camera.log",
+    "file": "logs/pi_visible_camera_legacy.log",
     "json": true
   }
 }

@@ -1,5 +1,6 @@
 {
   "runtime": {
+    "tracking_backend": "adaptive",
     "tracking_mode": "adaptive_visible_region",
     "render_mode": "procedural",
     "fps_target": 15,
@@ -28,6 +29,11 @@
     "surprised_brow_enter": 0.48,
     "surprised_brow_exit": 0.30,
     "cheerful_brow_enter": 0.18
+  },
+  "tracking": {
+    "search_margin": 0.18,
+    "relock_frames": 4,
+    "min_tracking_confidence": 0.24
   },
   "renderer": {
     "resolution": 16
