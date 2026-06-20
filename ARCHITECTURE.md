@@ -734,3 +734,26 @@ Implement the MVP around this exact split:
 - replayable mocks and structured logs from the start
 
 That gives you a Pi-friendly architecture that works for the dark close-range mask setup now and still expands cleanly to full-face, microphone, and LED output later.
+
+## 23. Normal camera tryout flow
+
+For early bring-up with a standard visible-light camera, start with the dedicated config:
+
+- `face_mask/config/pi_visible_camera.yaml`
+
+Run:
+
+- `python3 -m face_mask.main --config face_mask/config/pi_visible_camera.yaml`
+
+What to verify first:
+
+- camera stream opens reliably
+- both eyes and brow area are centered enough for the static ROI layout
+- `eye_open`, `brow_raise`, `visibility_score`, and `lighting_score` move in plausible directions
+- state changes are stable and do not flicker excessively
+
+Important interpretation note:
+
+- current tracking is heuristic and calibration-driven, not identity-aware face recognition
+- it does not require enrolling a user face or defining a personal template in advance
+- it still depends on runtime calibration of ROI placement, lighting, and thresholds for the physical camera setup
