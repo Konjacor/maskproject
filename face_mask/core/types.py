@@ -50,7 +50,7 @@ class FeatureBundle:
     visibility_score: float = 1.0
     lighting_score: float = 1.0
     confidence: float = 1.0
-    raw: dict[str, float | None] = field(default_factory=dict)
+    raw: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(slots=True)

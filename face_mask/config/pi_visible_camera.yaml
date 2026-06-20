@@ -34,7 +34,9 @@
   },
   "output": {
     "always_print_ascii": false,
-    "print_features_every": 6
+    "print_features_every": 6,
+    "snapshot_every": 12,
+    "snapshot_dir": "debug_frames"
   },
   "logging": {
     "level": "DEBUG",

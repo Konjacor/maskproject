@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import numpy as np
+
 from face_mask.core.types import FeatureBundle, FramePacket, ROI, TrackingResult
 from face_mask.features.brow_feature import compute_brow_raise_score
 from face_mask.features.eye_feature import compute_eye_open_score
@@ -8,6 +10,19 @@ from face_mask.utils.image_ops import extract_roi
 
 def _roi_image(gray, roi: ROI):
     return extract_roi(gray, x=roi.x, y=roi.y, width=roi.width, height=roi.height)
+
+
+def _roi_stats(region: np.ndarray, roi: ROI) -> dict[str, float | int]:
+    return {
+        "x": roi.x,
+        "y": roi.y,
+        "width": roi.width,
+        "height": roi.height,
+        "mean": float(np.mean(region)),
+        "std": float(np.std(region)),
+        "min": int(np.min(region)),
+        "max": int(np.max(region)),
+    }
 
 
 def build_feature_bundle(frame: FramePacket, tracking: TrackingResult) -> FeatureBundle:
@@ -36,5 +51,11 @@ def build_feature_bundle(frame: FramePacket, tracking: TrackingResult) -> Featur
             "left_eye_open": left_eye,
             "right_eye_open": right_eye,
             "brow_raise": brow_raise,
+            "roi_stats": {
+                "left_eye": _roi_stats(left_eye_roi, regions["left_eye"]),
+                "right_eye": _roi_stats(right_eye_roi, regions["right_eye"]),
+                "brow": _roi_stats(brow_roi, regions["brow"]),
+            },
+            "tracking_notes": list(tracking.notes),
         },
     )

@@ -44,7 +44,7 @@ class RuntimePipeline:
                     features = build_feature_bundle(frame, tracking)
                     features, expression = self.state_machine.update(features)
                     pixel_frame = self.renderer.render(expression, features, self.config.get("renderer", {}))
-                    self.output.emit(expression, features, pixel_frame)
+                    self.output.emit(expression, features, pixel_frame, frame, tracking)
                     log_event(
                         self.logger,
                         logging.DEBUG,
