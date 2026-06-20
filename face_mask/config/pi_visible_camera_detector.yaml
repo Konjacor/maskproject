@@ -1,0 +1,53 @@
+{
+  "runtime": {
+    "tracking_backend": "detector",
+    "tracking_mode": "upper_face",
+    "render_mode": "procedural",
+    "fps_target": 12,
+    "max_frames": 180,
+    "logger_name": "face_mask"
+  },
+  "sensor": {
+    "type": "camera",
+    "camera_index": 0,
+    "width": 640,
+    "height": 480,
+    "fps": 20,
+    "flip_horizontal": false,
+    "flip_vertical": false,
+    "normalize_contrast": true,
+    "infrared_mode": false
+  },
+  "features": {
+    "eye_smoothing_alpha": 0.48,
+    "brow_smoothing_alpha": 0.26
+  },
+  "state_machine": {
+    "min_hold_ms": 200,
+    "sleepy_enter": 0.27,
+    "sleepy_exit": 0.38,
+    "surprised_brow_enter": 0.42,
+    "surprised_brow_exit": 0.26,
+    "cheerful_brow_enter": 0.15
+  },
+  "tracking": {
+    "face_cascade_path": "",
+    "min_face_area_ratio": 0.06,
+    "relock_frames": 6,
+    "local_margin": 0.18
+  },
+  "renderer": {
+    "resolution": 16
+  },
+  "output": {
+    "always_print_ascii": false,
+    "print_features_every": 6,
+    "snapshot_every": 12,
+    "snapshot_dir": "debug_frames_detector"
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "logs/pi_visible_camera_detector.log",
+    "json": true
+  }
+}

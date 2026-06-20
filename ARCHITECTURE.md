@@ -760,11 +760,14 @@ Important interpretation note:
 
 ## 24. Tracking backends
 
-The runtime now supports two tracking backends:
+The runtime now supports three tracking backends:
 
 - `tracking_backend = adaptive`
   - does coarse upper-face search, local follow-up, and relock when confidence drops
-  - use this for real camera work and broad device compatibility
+  - use this for real camera work when no detector is available
+- `tracking_backend = detector`
+  - uses lightweight OpenCV face detection, then generates relative eye and brow ROIs inside the detected face
+  - use this as the first model-assisted baseline on a normal camera
 - `tracking_backend = legacy`
   - uses the original fixed ROI layout as a fallback baseline
   - use this for comparison and for very controlled camera positioning
@@ -772,5 +775,12 @@ The runtime now supports two tracking backends:
 Suggested configs:
 
 - adaptive visible-light camera: `face_mask/config/pi_visible_camera.yaml`
+- detector visible-light camera: `face_mask/config/pi_visible_camera_detector.yaml`
 - adaptive night-vision camera: `face_mask/config/pi_nightvision.yaml`
 - legacy visible-light fallback: `face_mask/config/pi_visible_camera_legacy.yaml`
+
+Recommended comparison order:
+
+1. run detector on a normal visible-light camera
+2. compare ROI placement against adaptive on the same camera
+3. keep legacy only as a debug baseline

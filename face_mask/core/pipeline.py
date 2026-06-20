@@ -14,6 +14,7 @@ from face_mask.sensors.camera_sensor import CameraSensor
 from face_mask.sensors.mock_sensor import MockSensor
 from face_mask.sensors.replay_sensor import ReplaySensor
 from face_mask.tracking.adaptive_tracker import AdaptiveVisibleRegionTracker
+from face_mask.tracking.detector_tracker import DetectorTracker
 from face_mask.tracking.full_face_tracker import FullFaceTracker
 from face_mask.tracking.upper_face_tracker import UpperFaceTracker
 from face_mask.utils.timing import timed
@@ -89,6 +90,8 @@ class RuntimePipeline:
         tracking_backend = runtime_config.get("tracking_backend", "legacy")
         if tracking_backend == "adaptive":
             return AdaptiveVisibleRegionTracker(tracking_mode=tracking_mode, config=config)
+        if tracking_backend == "detector":
+            return DetectorTracker(tracking_mode=tracking_mode, config=config)
         if tracking_mode == "full_face":
             return FullFaceTracker(tracking_mode=tracking_mode)
         return UpperFaceTracker(tracking_mode=tracking_mode)
