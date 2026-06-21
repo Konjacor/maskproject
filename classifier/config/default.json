@@ -1,0 +1,62 @@
+{
+  "labels": ["neutral", "sleepy", "surprised", "cheerful"],
+  "input_size": 96,
+  "grayscale": true,
+  "camera": {
+    "index": 0,
+    "width": 640,
+    "height": 480,
+    "fps": 20,
+    "flip_horizontal": false,
+    "flip_vertical": false,
+    "normalize_contrast": true
+  },
+  "tracking": {
+    "backend": "detector",
+    "mode": "upper_face",
+    "face_cascade_path": "",
+    "min_face_area_ratio": 0.06,
+    "relock_frames": 6,
+    "local_margin": 0.18
+  },
+  "dataset": {
+    "raw_dir": "classifier/data/raw",
+    "processed_train_dir": "classifier/data/processed/train",
+    "processed_val_dir": "classifier/data/processed/val",
+    "val_split": 0.2,
+    "seed": 7
+  },
+  "capture": {
+    "label": "neutral",
+    "save_every": 2,
+    "snapshot_dir": "classifier/runs/capture_debug",
+    "roi_margin": 0.08
+  },
+  "training": {
+    "batch_size": 16,
+    "epochs": 20,
+    "learning_rate": 0.0005,
+    "fine_tune_at": 100,
+    "augmentation": {
+      "rotation": 8,
+      "translation": 0.08,
+      "zoom": 0.08,
+      "brightness": 0.12,
+      "contrast": 0.12,
+      "noise_std": 0.03
+    }
+  },
+  "export": {
+    "saved_model_dir": "classifier/models/export/saved_model",
+    "tflite_path": "classifier/models/export/model.tflite",
+    "tflite_int8_path": "classifier/models/export/model_int8.tflite",
+    "labels_path": "classifier/models/export/labels.json"
+  },
+  "inference": {
+    "model_path": "classifier/models/export/model_int8.tflite",
+    "labels_path": "classifier/models/export/labels.json",
+    "print_every": 6,
+    "snapshot_every": 12,
+    "snapshot_dir": "classifier/runs/inference_debug"
+  }
+}

@@ -1,2 +1,3 @@
 numpy
 opencv-python
+# classifier training uses classifier/requirements.txt
